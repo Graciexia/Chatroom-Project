@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # delete 'rooms/:id', to: 'rooms#destroy'
   get '/rooms', to: 'rooms#index'
   post('/rooms', { to: 'rooms#create' })
+
+  get 'top_user', to: 'rooms#top_user'
   # The priority is bas ed upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
