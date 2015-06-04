@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   # get('/rooms/new', {to: 'todos#new'})
 
-  # get('/rooms/:id', {to: 'rooms#show' })
+  get('/rooms/:user', {to: 'rooms#show' })
   # put '/rooms/:id', to: 'rooms#update'
   # delete 'rooms/:id', to: 'rooms#destroy'
   get '/rooms', to: 'rooms#index'
-  # post('/rooms', { to: 'rooms#create' })
+  post('/rooms', { to: 'rooms#create' })
   # The priority is bas ed upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
