@@ -27,7 +27,7 @@ class RoomsController < ApplicationController
   #   end
   # end
 
-  def top_users
+  def top_user
     room = Room.select('*, count(user) as user_count').group('user').order('user_count DESC').limit(4)
     render json: room
   end
