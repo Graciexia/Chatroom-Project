@@ -60,8 +60,8 @@ class RoomsController < ApplicationController
       render json: last_four_hours_users
   end
 
-  def special_string
-    if params[:messages] == "amiright"
-    render json: "you are so right."
-  end
+  # def special_string
+  #   if params[:messages] == "amiright"
+  #   render json: "you are so right."
+  # end
 end

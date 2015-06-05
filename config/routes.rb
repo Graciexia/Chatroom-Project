@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # delete 'rooms/:id', to: 'rooms#destroy'
   get '/rooms', to: 'rooms#index'
   post('/rooms', { to: 'rooms#create' })
-  post('/rooms', { to: 'rooms#special_string' })
+  # post('/rooms', { to: 'rooms#special_string' })
   get 'top_user', to: 'rooms#top_user'
   get 'top_room', to: 'rooms#top_room'
   get 'last_four_hours_users', to: 'rooms#last_four_hours_users'
