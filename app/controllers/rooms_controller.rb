@@ -16,11 +16,12 @@ class RoomsController < ApplicationController
     begin
       filter_words = []
       if filter_words.includes?(params[:messages])
-      room = Room.create(room: params[:room], user: params[:user], messages: "*******")
-      render json: room
+        room = Room.create(room: params[:room], user: params[:user], messages: "*******")
+        render json: room
       else
-      room = Room.create(room: params[:room], user: params[:user], messages: params[:messages])
-      render json: room
+        room = Room.create(room: params[:room], user: params[:user], messages: params[:messages])
+        render json: room
+      end
     rescue ActionController::ParameterMissing => error
       render json: { error: error.message }, status: 422
     end
