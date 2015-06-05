@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # get('/rooms/new', {to: 'todos#new'})
 
   get('/rooms/:user', {to: 'rooms#show' })
+  get '/rooms/get_time', to: 'rooms#get_time'
   # put '/rooms/:id', to: 'rooms#update'
   # delete 'rooms/:id', to: 'rooms#destroy'
   get '/rooms', to: 'rooms#index'

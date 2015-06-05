@@ -16,22 +16,23 @@ class RoomsController < ApplicationController
     end
   end
 
-  # def get_time
-  #    time = Time.new
-  #    room = Room.all
-  #    last_five_minutes = []
-  #     room.each do |element|
-  #       if time - element.created_by
-  #       end
-  #     end
-  #   end
-  # end
+  def get_time
+     time = Time.new
+     room = Room.all
+     last_five_minutes = []
+      room.each do |element|
+        if (time - element.created_by) <= 300000
+          last_five_minutes << element
+        end
+      end
+      render json: last_five_minutes
+    end
 
   def top_user
     room =  Room.all.group_by { |room| room.user }
                     .sort_by  { |user, messages| messages.count }
                     .reverse
-                    .take(5)
+                    .take(10)
                     .map { |rooms| rooms.first }
     render json: room
   end
