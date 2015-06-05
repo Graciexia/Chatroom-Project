@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/rooms/get_time', to: 'rooms#get_time'
   get('/rooms/:user', {to: 'rooms#show' })
-  # get '/rooms/:room', to: 'rooms#get_rooms'
+  get '/rooms/all/:room', to: 'rooms#get_room'
   # put '/rooms/:id', to: 'rooms#update'
   # delete 'rooms/:id', to: 'rooms#destroy'
   get '/rooms', to: 'rooms#index'
