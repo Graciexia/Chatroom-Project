@@ -15,15 +15,13 @@ class RoomsController < ApplicationController
   def create
     begin
       filter_words = ["fuck","shit","ass","bitch"]
-      filter_words.each do |word|
-      if params[:messages].include?(word)
+      if filter_words.include?(params[:messages])
         room = Room.create(room: params[:room], user: params[:user], messages: "*******")
         render json: room
       else
         room = Room.create(room: params[:room], user: params[:user], messages: params[:messages])
         render json: room
       end
-    end
     rescue ActionController::ParameterMissing => error
       render json: { error: error.message }, status: 422
     end
