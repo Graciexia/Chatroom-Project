@@ -3,13 +3,14 @@ Rails.application.routes.draw do
 
   get '/rooms/get_time', to: 'rooms#get_time'
   get('/rooms/:user', {to: 'rooms#show' })
-  get '/rooms/:room', to: 'rooms#get_rooms'
+  # get '/rooms/:room', to: 'rooms#get_rooms'
   # put '/rooms/:id', to: 'rooms#update'
   # delete 'rooms/:id', to: 'rooms#destroy'
   get '/rooms', to: 'rooms#index'
   post('/rooms', { to: 'rooms#create' })
 
   get 'top_user', to: 'rooms#top_user'
+  # get 'top_room', to: 'rooms#top_room'
   # The priority is bas ed upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

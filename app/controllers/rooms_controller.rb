@@ -7,9 +7,9 @@ class RoomsController < ApplicationController
     render json: Room.where(user: params[:user])
   end
 
-   def get_rooms
-    render json: Room.where(room: params[:room])
-  end
+  #  def get_rooms
+  #   render json: Room.where(room: params[:room])
+  # end
 
 
   def create
@@ -42,6 +42,12 @@ class RoomsController < ApplicationController
     render json: room
   end
 
-  # def top_rooms
-  #   room = Room.all .group_by{|}
+  # def top_room
+  #    room =  Room.all.group_by { |room| room.room }
+  #                   .sort_by  { |user, messages| messages.count }
+  #                   .last
+  #                   .map { |rooms| rooms.first }
+  #   render json: room
+
+  #   end
 end
