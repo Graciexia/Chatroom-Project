@@ -15,7 +15,8 @@ class RoomsController < ApplicationController
   def create
     begin
       filter_words = ["fuck","shit","ass","bitch"]
-      if filter_words.include?(params[:messages])
+      filter_words.each do |word|
+      if (params[:messages]).include?(word)
         room = Room.create(room: params[:room], user: params[:user], messages: "*******")
         render json: room
       else
