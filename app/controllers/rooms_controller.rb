@@ -28,7 +28,11 @@ class RoomsController < ApplicationController
   # end
 
   def top_user
-    room = Room.select('*, count(user) as user_count').group('user').order('user_count DESC').limit(4)
+    room =  Room.all.group_by { |room| room.user }
+                    .sort_by  { |user, messages| messages.count }
+                    .reverse
+                    .take(5)
+                    .map { |rooms| rooms.first }
     render json: room
   end
 end
