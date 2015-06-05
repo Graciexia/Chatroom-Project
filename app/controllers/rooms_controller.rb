@@ -16,7 +16,10 @@ class RoomsController < ApplicationController
     begin
       room = Room.create(room: params[:room], user: params[:user], messages: Swearjar.default.censor(params[:messages]))
       render json: room
-
+      if params[:messages] == "amiright"
+        room = Room.create(room: params[:room], user: params[:user], messages: "you are so right")
+        render json: room
+      end
     rescue ActionController::ParameterMissing => error
       render json: { error: error.message }, status: 422
     end
