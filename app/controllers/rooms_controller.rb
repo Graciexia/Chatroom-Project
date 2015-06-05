@@ -14,11 +14,9 @@ class RoomsController < ApplicationController
 
   def create
     begin
-        room = Room.create(room: params[:room], user: params[:user], messages: Swearjar.default.censor(params[:messages]))
-        render json: room
-         if params[:messages] == "amiright"
-           render json: "you are so right."
-         end
+      room = Room.create(room: params[:room], user: params[:user], messages: Swearjar.default.censor(params[:messages]))
+      render json: room
+
     rescue ActionController::ParameterMissing => error
       render json: { error: error.message }, status: 422
     end
@@ -62,6 +60,8 @@ class RoomsController < ApplicationController
       render json: last_four_hours_users
   end
 
-
-
+  def special_string
+    if params[:messages] == "amiright"
+    render json: "you are so right."
+  end
 end
