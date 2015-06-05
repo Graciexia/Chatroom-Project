@@ -14,14 +14,8 @@ class RoomsController < ApplicationController
 
   def create
     begin
-      filter_words = ["fuck","shit","ass","bitch"]
-      if filter_words.include?(params[:messages])
-        room = Room.create(room: params[:room], user: params[:user], messages: "*******")
+        room = Room.create(room: params[:room], user: params[:user], messages: Swearjar.default.censor(params[:messages]))
         render json: room
-      else
-        room = Room.create(room: params[:room], user: params[:user], messages: params[:messages])
-        render json: room
-      end
     rescue ActionController::ParameterMissing => error
       render json: { error: error.message }, status: 422
     end
