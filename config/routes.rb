@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post('/rooms', { to: 'rooms#create' })
 
   get 'top_user', to: 'rooms#top_user'
-  # get 'top_room', to: 'rooms#top_room'
+  get 'top_room', to: 'rooms#top_room'
   # The priority is bas ed upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
