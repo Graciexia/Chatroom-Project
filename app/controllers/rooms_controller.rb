@@ -50,7 +50,7 @@ class RoomsController < ApplicationController
   def last_four_hours_users
      time = Time.new
      room = Room.all
-     last_five_minutes = []
+     last_four_hours_users = []
       room.each do |element|
         if (time - element.created_at) <= 14400
           last_four_hours_users << element.user
