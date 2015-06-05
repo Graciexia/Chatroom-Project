@@ -21,7 +21,7 @@ class RoomsController < ApplicationController
      room = Room.all
      last_five_minutes = []
       room.each do |element|
-        if (time - element.created_by) <= 300
+        if (time - element.created_at) <= 300
           last_five_minutes << element
         end
       end
