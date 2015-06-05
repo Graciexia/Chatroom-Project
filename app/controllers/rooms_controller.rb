@@ -65,8 +65,6 @@ class RoomsController < ApplicationController
       render json: last_four_hours_users
   end
 
-  def filter
-    room =
 
 
 end
