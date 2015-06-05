@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
     render json: Room.where(user: params[:user])
   end
 
-   def show
+   def get_rooms
     render json: Room.where(room: params[:room])
   end
 
