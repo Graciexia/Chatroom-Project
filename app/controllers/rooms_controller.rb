@@ -46,4 +46,18 @@ class RoomsController < ApplicationController
      room =  Room.all.group_by { |room| room.room }.sort_by  { |room| room.count }.take(3).map { |rooms| rooms.first }
     render json: room
     end
+
+  def last_four_hours_users
+     time = Time.new
+     room = Room.all
+     last_five_minutes = []
+      room.each do |element|
+        if (time - element.created_at) <= 14400
+          last_four_hours_users << element.user
+        end
+      end
+      render json: last_four_hours_users
+  end
+
+
 end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get 'top_user', to: 'rooms#top_user'
   get 'top_room', to: 'rooms#top_room'
+  get 'last_four_hours_users', to: 'rooms#last_four_hours_users'
   # The priority is bas ed upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
