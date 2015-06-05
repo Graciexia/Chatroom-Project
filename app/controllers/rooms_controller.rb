@@ -43,10 +43,7 @@ class RoomsController < ApplicationController
   end
 
   def top_room
-     room =  Room.all.group_by { |room| room.room }
-                    .sort_by  { |user, messages| messages.count }
-                    .last
-                    .map { |rooms| rooms.first }
+     room =  Room.all.group_by { |room| room.room }.sort_by  { |room| room.count }.take(3).map { |rooms| rooms.first }
     render json: room
 
     end
