@@ -14,6 +14,11 @@ class RoomsController < ApplicationController
 
   def create
     begin
+      filter_words = []
+      if filter_words.includes?(params[:messages])
+      room = Room.create(room: params[:room], user: params[:user], messages: "*******")
+      render json: room
+      else
       room = Room.create(room: params[:room], user: params[:user], messages: params[:messages])
       render json: room
     rescue ActionController::ParameterMissing => error
@@ -58,6 +63,9 @@ class RoomsController < ApplicationController
       end
       render json: last_four_hours_users
   end
+
+  def filter
+    room =
 
 
 end
