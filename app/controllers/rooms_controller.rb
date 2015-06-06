@@ -81,7 +81,16 @@ class RoomsController < ApplicationController
     render json: recent_chats
   end
 
-  # def get_history
-  #   render json: Room.where(created_at: < params[:created_at],  updated_at: > params[:updated_at])
-  # end
+  def get_history
+    room = Room.all
+    chat_history = []
+    time_start = Time.parse(params[:start_date])
+    time_end = Time.parse(params[:end_date])
+    room.each do |element|
+      if (time_start - element.created_at) < 0 && (element.created_at - time_end) < 0
+        chat_history << element
+      end
+    end
+    render json: chat_history
+  end
 end

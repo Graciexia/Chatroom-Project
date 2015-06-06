@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'chatted_recently/:display_range_seconds', to: 'rooms#chatted_recently'
   get 'chatted_recently', to: 'rooms#chatted_recently'
 
+  get 'get_history/:start_date/:end_date', to: 'rooms#get_history'
 
 
   # The priority is bas ed upon order of creation: first created -> highest priority.
