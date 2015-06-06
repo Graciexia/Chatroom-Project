@@ -25,6 +25,7 @@ class RoomsController < ApplicationController
   end
 
   def get_time
+    # logger.debug "[" + params[:display_range_seconds].to_s + "]"
     if params[:display_range_seconds] == nil
       display_range_seconds = 300 # defaul to display the last 5 minutes
     else
