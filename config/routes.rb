@@ -1,20 +1,18 @@
 Rails.application.routes.draw do
-  # get('/rooms/new', {to: 'todos#new'})
 
-
-
-
+  get '/rooms/foo/:created_at/:updated_at', to: 'rooms#get_history'
   get '/rooms/all/:room', to: 'rooms#get_room'
   get '/rooms/get_time', to: 'rooms#get_time'
   get('/rooms/:user', {to: 'rooms#show' })
-  # put '/rooms/:id', to: 'rooms#update'
-  # delete 'rooms/:id', to: 'rooms#destroy'
+
   get '/rooms', to: 'rooms#index'
   post('/rooms', { to: 'rooms#create' })
-  # post('/rooms', { to: 'rooms#special_string' })
   get 'top_user', to: 'rooms#top_user'
   get 'top_room', to: 'rooms#top_room'
   get 'last_four_hours_users', to: 'rooms#last_four_hours_users'
+
+
+
   # The priority is bas ed upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
