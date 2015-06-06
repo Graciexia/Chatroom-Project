@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   get '/rooms/foo/:created_at/:updated_at', to: 'rooms#get_history'
   get '/rooms/all/:room', to: 'rooms#get_room'
-  get '/rooms/get_time', to: 'rooms#get_time'
+  get '/rooms/get_time/:display_range_seconds', to: 'rooms#get_time'
+
   get('/rooms/:user', {to: 'rooms#show' })
 
   get '/rooms', to: 'rooms#index'

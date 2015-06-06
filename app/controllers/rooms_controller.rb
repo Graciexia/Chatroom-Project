@@ -7,10 +7,9 @@ class RoomsController < ApplicationController
     render json: Room.where(user: params[:user])
   end
 
-   def get_room
+  def get_room
     render json: Room.where(room: params[:room])
   end
-
 
   def create
     begin
@@ -26,11 +25,16 @@ class RoomsController < ApplicationController
   end
 
   def get_time
+    if params[:display_range_seconds] == nil
+      display_range_seconds = 300 # defaul to display the last 5 minutes
+    else
+      display_range_seconds = params[:display_range_seconds].to_i
+    end
     time = Time.new
     room = Room.all
     last_five_minutes = []
     room.each do |element|
-      if (time - element.created_at) <= 300
+      if (time - element.created_at) <= display_range_seconds
         last_five_minutes << element
       end
     end
