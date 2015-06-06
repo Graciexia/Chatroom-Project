@@ -33,27 +33,24 @@ class RoomsController < ApplicationController
     end
     time = Time.new
     room = Room.all
-    last_five_minutes = []
+    display_messages = []
     room.each do |element|
       if (time - element.created_at) <= display_range_seconds
-        last_five_minutes << element
+        display_messages << element
       end
     end
-    render json: last_five_minutes
+    render json: display_messages
   end
 
   def top_user
-    show_users =  Room.all.group_by { |room| room.user }
-                    .sort_by  { |user, messages| messages.count }
-                    .reverse
-                    .take(10)
-                    .map { |rooms| rooms.first }
-    if show_users.include?("room master")
-      top_users = show_users - ["room master"]
-      render json: top_users
-    else
-      render json: show_users
-    end
+    top_users = Room.all
+                   .group_by { |room| room.user }
+                   .sort_by  { |user, messages| messages.count }
+                   .reverse
+                   .take(10)
+                   .map { |rooms| rooms.first }
+    top_users = top_users - ["room master"]
+    render json: top_users
   end
 
   def top_room
@@ -64,23 +61,24 @@ class RoomsController < ApplicationController
     render json: room
   end
 
-  def last_four_hours_users
+  def chatted_recently
+    if params[:display_range_seconds] == nil
+      display_range_seconds = 14400 # defaul to display the last 4 hours
+    else
+      display_range_seconds = params[:display_range_seconds].to_i
+    end
     time = Time.new
     room = Room.all
-    last_four_hours = []
+    recent_chats = []
     room.each do |element|
-      if (time - element.created_at) <= 14400
-        last_four_hours << element
+      if (time - element.created_at) <= display_range_seconds
+        recent_chats << element
       end
     end
-    show_users = last_four_hours.group_by { |room| room.user }
-                                .map { |rooms| rooms.first }
-      if show_users.include?("room master")
-        last_four_hours_users = show_users - ["room master"]
-        render json: last_four_hours_users
-      else
-        render json: show_users
-      end
+    recent_chats = recent_chats.group_by { |room| room.user }
+                               .map { |rooms| rooms.first }
+    recent_chats = recent_chats - ["room master"]
+    render json: recent_chats
   end
 
   # def get_history

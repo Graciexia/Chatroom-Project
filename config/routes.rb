@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   post('/rooms', { to: 'rooms#create' })
   get 'top_user', to: 'rooms#top_user'
   get 'top_room', to: 'rooms#top_room'
-  get 'last_four_hours_users', to: 'rooms#last_four_hours_users'
+  get 'chatted_recently/:display_range_seconds', to: 'rooms#chatted_recently'
+  get 'chatted_recently', to: 'rooms#chatted_recently'
 
 
 
