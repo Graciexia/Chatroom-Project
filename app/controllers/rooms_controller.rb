@@ -115,7 +115,7 @@ class RoomsController < ApplicationController
 
       else
         room.each do |element|
-          if (time_start - element.created_at) <= 0 && (element.created_at - time_end) <= 0
+          if (time_start - element.created_at) < 0 && (element.created_at - time_end) < 0
             chat_history << element
           end
         end
