@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   get 'get_history/:start_date/:end_date', to: 'rooms#get_history'
 
+  # get 'get_history/:start_date/:', to: 'rooms#get_history'
+
   get '*path', to: 'rooms#show_error'
 
   get '/', to: 'rooms#show_error'

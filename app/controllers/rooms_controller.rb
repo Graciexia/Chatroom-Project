@@ -101,12 +101,27 @@ class RoomsController < ApplicationController
     begin
       time_start = Time.parse(params[:start_date])
       time_end = Time.parse(params[:end_date])
-      room.each do |element|
-        if (time_start - element.created_at) < 0 && (element.created_at - time_end) < 0
-          chat_history << element
+
+      if time_start == time_end
+        puts "#{params[:start_date]}   ********************* #{params[:end_date]}"
+
+        room.each do |element|
+          if element.created_at.strftime("%Y-%m-%d") == time_start.strftime("%Y-%m-%d")
+            chat_history << element
+          end
         end
+
+        render json:  chat_history
+
+      else
+        room.each do |element|
+          if (time_start - element.created_at) <= 0 && (element.created_at - time_end) <= 0
+            chat_history << element
+          end
+        end
+        render json: chat_history
+        logger.debug "hihihi"
       end
-      render json: chat_history
     rescue Exception => error
       render json: { error: error.message + " --- specified date format is not valid."}, status: 422
     end
