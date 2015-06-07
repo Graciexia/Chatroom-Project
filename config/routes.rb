@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get('/rooms/:user', {to: 'rooms#show' })
 
   get '/rooms', to: 'rooms#index'
+
   post '/rooms', to: 'rooms#create'
 
   get 'top_user', to: 'rooms#top_user'

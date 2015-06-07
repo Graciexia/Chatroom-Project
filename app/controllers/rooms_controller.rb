@@ -31,15 +31,22 @@ class RoomsController < ApplicationController
     else
       display_range_seconds = params[:display_range_seconds].to_i
     end
-    time = Time.new
-    room = Room.all
-    display_messages = []
-    room.each do |element|
-      if (time - element.created_at) <= display_range_seconds
-        display_messages << element
+    begin
+      if display_range_seconds <= 0
+        raise InvalidData
       end
+      time = Time.new
+      room = Room.all
+      display_messages = []
+      room.each do |element|
+        if (time - element.created_at) <= display_range_seconds
+          display_messages << element
+        end
+      end
+      render json: display_messages
+    rescue Exception => error
+      render json: { error: error.message + " --- time range must be expressed as seconds >= 1."}, status: 422
     end
-    render json: display_messages
   end
 
   def top_user
@@ -67,18 +74,25 @@ class RoomsController < ApplicationController
     else
       display_range_seconds = params[:display_range_seconds].to_i
     end
-    time = Time.new
-    room = Room.all
-    recent_chats = []
-    room.each do |element|
-      if (time - element.created_at) <= display_range_seconds
-        recent_chats << element
+    begin
+      if display_range_seconds <= 0
+        raise InvalidData
       end
+      time = Time.new
+      room = Room.all
+      recent_chats = []
+      room.each do |element|
+        if (time - element.created_at) <= display_range_seconds
+          recent_chats << element
+        end
+      end
+      recent_chats = recent_chats.group_by { |room| room.user }
+                                 .map { |rooms| rooms.first }
+      recent_chats = recent_chats - ["room master"]
+      render json: recent_chats
+    rescue Exception => error
+      render json: { error: error.message + " --- time range must be expressed as seconds >= 1."}, status: 422
     end
-    recent_chats = recent_chats.group_by { |room| room.user }
-                               .map { |rooms| rooms.first }
-    recent_chats = recent_chats - ["room master"]
-    render json: recent_chats
   end
 
   def get_history
