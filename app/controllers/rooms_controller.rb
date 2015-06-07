@@ -103,10 +103,8 @@ class RoomsController < ApplicationController
       time_end = Time.parse(params[:end_date])
 
       if time_start == time_end
-        puts "#{params[:start_date]}   ********************* #{params[:end_date]}"
-
         room.each do |element|
-          if element.created_at.strftime("%Y-%m-%d") == time_start.strftime("%Y-%m-%d")
+          if element.created_at.strftime("%m-%d-%Y") == time_start.strftime("%m-%d-%Y")
             chat_history << element
           end
         end
