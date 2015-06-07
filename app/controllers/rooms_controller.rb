@@ -97,4 +97,12 @@ class RoomsController < ApplicationController
       render json: { error: error.message + " --- specified date format is not valid."}, status: 422
     end
   end
+
+  def show_error
+    begin
+      raise InvalidPage
+    rescue Exception => error
+      render json: { error: error.message + " --- the specified URL is not valid."}, status: 422
+    end
+  end
 end

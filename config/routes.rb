@@ -1,20 +1,29 @@
 Rails.application.routes.draw do
 
-  get '/rooms/foo/:created_at/:updated_at', to: 'rooms#get_history'
   get '/rooms/all/:room', to: 'rooms#get_room'
+
   get '/rooms/get_time/:display_range_seconds', to: 'rooms#get_time'
- get '/rooms/get_time', to: 'rooms#get_time'
+
+  get '/rooms/get_time', to: 'rooms#get_time'
 
   get('/rooms/:user', {to: 'rooms#show' })
 
   get '/rooms', to: 'rooms#index'
-  post('/rooms', { to: 'rooms#create' })
+  post '/rooms', to: 'rooms#create'
+
   get 'top_user', to: 'rooms#top_user'
+
   get 'top_room', to: 'rooms#top_room'
+
   get 'chatted_recently/:display_range_seconds', to: 'rooms#chatted_recently'
+
   get 'chatted_recently', to: 'rooms#chatted_recently'
 
   get 'get_history/:start_date/:end_date', to: 'rooms#get_history'
+
+  get '*path', to: 'rooms#show_error'
+
+  get '/', to: 'rooms#show_error'
 
 
   # The priority is bas ed upon order of creation: first created -> highest priority.
