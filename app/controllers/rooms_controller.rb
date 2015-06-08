@@ -101,10 +101,9 @@ class RoomsController < ApplicationController
     begin
       time_start = Time.parse(params[:start_date])
       time_end = Time.parse(params[:end_date]) + 86400
-      if time_start.gmt_offset != -18000 # CDT
-        time_start = time_start.getlocal(18000)
-        time_end = time_end.getlocal(18000)
-      end
+      # force to CDT
+      time_start = time_start + time_start.gmt_offset + 18000
+      time_end = time_end + time_end.gmt_offset + 18000
       logger.debug time_start
       logger.debug time_end
 
