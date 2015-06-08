@@ -28,6 +28,6 @@ module ChatProject
       'Access-Control-Allow-Headers'  => 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
     }
     config.active_record.raise_in_transactional_callbacks = true
-    # config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'Central Time (US & Canada)'
   end
 end
