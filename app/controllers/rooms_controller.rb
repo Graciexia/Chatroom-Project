@@ -100,7 +100,9 @@ class RoomsController < ApplicationController
     chat_history = []
     begin
       time_start = Time.parse(params[:start_date])
+      logger.debug time_start
       time_end = Time.parse(params[:end_date]) + 86400
+      logger.debug time_end
 
       room.each do |element|
         if (element.created_at - time_start) >= 0 && (time_end - element.created_at) > 0
