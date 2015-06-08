@@ -99,9 +99,13 @@ class RoomsController < ApplicationController
     room = Room.all
     chat_history = []
     begin
-      time_start = Time.parse(params[:start_date] + " CDT")
+      time_start = Time.parse(params[:start_date])
+      time_end = Time.parse(params[:end_date]) + 86400
+      if time_start.gmt_offset != -18000 # CDT
+        time_start = time_start.getlocal(-18000)
+        time_end = time_end.getlocal(-18000)
+      end
       logger.debug time_start
-      time_end = Time.parse(params[:end_date] + " CDT") + 86400
       logger.debug time_end
 
       room.each do |element|
