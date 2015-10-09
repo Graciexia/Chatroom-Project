@@ -17,7 +17,6 @@ class RoomsController < ApplicationController
       render json: room
       if params[:messages] == "amiright"
         room = Room.create(room: params[:room], user: "room master", messages: "you are so right")
-        # render json: room
       end
     rescue ActionController::ParameterMissing => error
       render json: { error: error.message }, status: 422
@@ -86,7 +85,7 @@ class RoomsController < ApplicationController
           recent_chats << element
         end
       end
-      recent_chats = recent_chats.group_by { |room| room.user }
+      recent_chats = recent_chats.group_by { |room| room.user }–
                                  .map { |rooms| rooms.first }
       recent_chats = recent_chats - ["room master"]
       render json: recent_chats
